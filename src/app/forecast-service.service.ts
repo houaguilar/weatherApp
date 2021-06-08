@@ -20,7 +20,7 @@ export class ForecastServiceService {
   constructor(private http: HttpClient, private geolocationService: GeolocationService) {
     this.weather$ = this.weatherSubject.asObservable().pipe(map(this.structureData));
 
-    this.geolocationService.coords$.then((coords) => {
+    this.geolocationService.coords$.subscribe((coords) => {
       this.getHttp(coords);
     });
 
@@ -65,9 +65,9 @@ export class ForecastServiceService {
   getHttp(coords: Coords){
     let args: string = `?lat=${coords.lat}&lon=${coords.lon}&APPID=${environment.key}&units=metric`;
     let url = this.endpoint + args;
-    if (isDevMode()) {
+    /*if (isDevMode()) {
       url = 'assets/forecast.json';
-    }
+    }*/
     this.http.get(url).subscribe(this.weatherSubject);
   }
 }

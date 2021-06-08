@@ -31,7 +31,7 @@ export class CurrentWeatherService {
       };
       return weather;
     }));
-    this.geolocationService.coords$.then((coords) => {
+    this.geolocationService.coords$.subscribe((coords) => {
       this.getHttp(coords);
     });
   }
@@ -39,9 +39,9 @@ export class CurrentWeatherService {
   getHttp(coords: Coords){
     let args: string = `?lat=${coords.lat}&lon=${coords.lon}&APPID=${environment.key}&units=metric`;
     let url = this.endpoint + args;
-    if (isDevMode()) {
+    /*if (isDevMode()) {
       url = 'assets/weather.json';
-    }
+    }*/
     this.http.get(url).subscribe(this.weatherSubject);
   }
 }
