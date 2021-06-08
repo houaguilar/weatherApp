@@ -1,0 +1,1 @@
+<app-weather-card [@showUpElement] *ngIf="weatherService.weather$ | async as weather" [weather]="weather"></app-weather-card>
